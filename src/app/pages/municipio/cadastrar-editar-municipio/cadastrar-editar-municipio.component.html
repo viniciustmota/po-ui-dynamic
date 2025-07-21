@@ -1,0 +1,28 @@
+<div class="po-wrapper">
+  <po-toolbar p-title="{{ isEditMode ? 'Editar Munícipio' : 'Cadastrar Município'}}"></po-toolbar>
+
+  <app-menu-lateral></app-menu-lateral>
+
+  <po-page-default class="po-md-10 po-offset-md-1">
+    <po-dynamic-form
+      [p-fields]="fields"
+      [p-value]="model"
+      (p-submit)="submit(model)"
+    >
+    </po-dynamic-form>
+    
+    <div style="display: flex; gap: 10px;">
+      <po-button
+        p-label="Voltar"
+        (p-click)="voltar()">
+      </po-button>
+
+      <po-button
+        p-label="{{ isEditMode ? 'Editar' : 'Salvar'}}"
+        (p-click)="submit(model)">
+      </po-button>
+    </div>
+
+
+  </po-page-default>
+</div>

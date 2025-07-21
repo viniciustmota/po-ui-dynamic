@@ -1,12 +1,41 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import {
+  PoMenuItem,
+  PoMenuModule,
+  PoPageModule,
+  PoToolbarModule,
+  PoButtonModule ,
+  PoNotificationModule,
+} from '@po-ui/ng-components';
+
+import { PoPageLoginModule } from '@po-ui/ng-templates'
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    PoToolbarModule,
+    PoMenuModule,
+    PoPageModule,
+    PoButtonModule,
+    PoNotificationModule,
+    PoPageLoginModule,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'my-po-project';
+  readonly menus: Array<PoMenuItem> = [
+    { label: 'Home', action: this.onClick.bind(this) },
+  ];
+
+
+
+  private onClick() {
+    alert('Clicked in menu item');
+  }
 }

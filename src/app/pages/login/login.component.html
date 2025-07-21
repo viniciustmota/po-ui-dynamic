@@ -1,0 +1,13 @@
+<po-page-default p-title="Login - Localiza CEP">
+  <div class="po-row po-mt-3">
+    <div class="po-offset-md-4 po-md-4">
+      <form (ngSubmit)="fazerLogin()">
+        <po-input
+          name="email" [(ngModel)]="email" p-label="E-mail" p-placeholder="Digite seu e-mail" p-required p-type="email" (p-change)="email=$event"></po-input>
+
+        <po-button
+          class="po-mt-2" p-label="Acessar Sistema" p-kind="primary" (p-click)="fazerLogin()"></po-button>
+      </form>
+    </div>
+  </div>
+</po-page-default>
