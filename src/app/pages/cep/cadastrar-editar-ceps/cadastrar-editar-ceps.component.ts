@@ -8,12 +8,12 @@ import { CommonModule, Location  } from '@angular/common';
 
 
 @Component({
-  selector: 'app-cadastrar-editar-municipio',
+  selector: 'app-cadastrar-editar-ceps',
   imports: [CommonModule, PoToolbarModule, MenuLateralComponent, PoPageModule, PoDynamicModule, PoButtonModule],
-  templateUrl: './cadastrar-editar-municipio.component.html',
-  styleUrl: './cadastrar-editar-municipio.component.css'
+  templateUrl: './cadastrar-editar-ceps.component.html',
+  styleUrl: './cadastrar-editar-ceps.component.css'
 })
-export class CadastrarEditarMunicipioComponent {
+export class CadastrarEditarCepsComponent {
   isEditMode = false;
 
   NomeMetodo = "";
@@ -85,3 +85,4 @@ export class CadastrarEditarMunicipioComponent {
     this.location.back();
   }
 }
+

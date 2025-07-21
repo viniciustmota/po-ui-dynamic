@@ -8,12 +8,12 @@ import {
   PoPageDynamicTableComponent,
 
 } from '@po-ui/ng-templates';
-import { MunicipioService } from '../../../services/municipio/municipio.service';
 import { MenuLateralComponent } from '../../../components/menu-lateral/menu-lateral.component';
 import { HttpClient } from '@angular/common/http';
+import { CepService } from '../../../services/cep/cep.service';
 
 @Component({
-  selector: 'app-listar-municipios',
+  selector: 'app-listar-ceps',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,10 +25,10 @@ import { HttpClient } from '@angular/common/http';
     PoPageDynamicTableModule,
     PoTableModule
 ],
-  templateUrl: './listar-municipios.component.html',
-  styleUrls: ['./listar-municipios.component.css']
+  templateUrl: './listar-ceps.component.html',
+  styleUrl: './listar-ceps.component.css'
 })
-export class ListarMunicipiosComponent {
+export class ListarCepsComponent {
   mostrarTabela = true;
   serviceApi = '';
 
@@ -39,7 +39,7 @@ export class ListarMunicipiosComponent {
 
   constructor(
     private router: Router,
-    private municipioService: MunicipioService,
+    private cepService: CepService,
     private poNotification: PoNotificationService,
     private http : HttpClient
   ) {}
@@ -47,7 +47,7 @@ fields: PoDynamicFormField[] = [];
 items: any[] = [];
 
   ngOnInit() {
-  this.serviceApi = this.municipioService.apiUrl;
+  this.serviceApi = this.cepService.apiUrl;
 
   this.http.get<any>(`${this.serviceApi}/metadata`).subscribe(response => {
     console.log('Metadata response:', response);
@@ -63,15 +63,15 @@ items: any[] = [];
   }
 
    actions: PoPageDynamicTableActions = {
-    new: '/municipios/novo',
+    new: '/ceps/novo',
 
     edit: (_id: string, resource: any) => {
-      this.router.navigate([`/municipios/editar/${resource.id}`]);
-      return { route: `/municipios/editar/${resource.id}` };
+      this.router.navigate([`/ceps/editar/${resource.id}`]);
+      return { route: `/ceps/editar/${resource.id}` };
     },
 
     remove: (_id: string, resource: any) => {
-      this.municipioService.delete(resource.id).subscribe({
+      this.cepService.delete(resource.id).subscribe({
         next: () => {
           this.poNotification.success('Município excluído com sucesso!');
           this.recarregarTabela();
@@ -80,25 +80,16 @@ items: any[] = [];
           this.poNotification.error('Erro ao excluir o município.');
         }
       });
-      return false; // para o comportamento default do PO UI
+      return false;
     },
 
     removeAll: true
   };
 
-  // deleteAction: PoPageDynamicTableActions = {
-  //   removeAll: (resources: any[]) => {
-  //     const rows = this.getSelectedRows();
-  //     const ids = this.extractIdsFromRows(rows);
-  //     console.log(resources);
-  //     return ids.map(id => ({ id }));
-  //   }
-  // };
-
   readonly breadcrumb: PoBreadcrumb = {
     items: [
       { label: 'Home', link: '/' },
-      { label: 'Municípios' }
+      { label: 'CEPs' }
     ],
   };
 
@@ -107,29 +98,3 @@ items: any[] = [];
     setTimeout(() => this.mostrarTabela = true, 0);
   }
 }
-
-
-// removeAll: (resources: any) => {
-//       const rows = this.getSelectedRows();
-//       const ids = this.extractIdsFromRows(rows);
-//       console.log(resources);
-
-//       console.log('IDs das linhas selecionadas:', ids);
-
-//       if (ids.length === 0) {
-//         this.poNotification.warning('Nenhum item selecionado para remover.');
-//         return [];
-//       }
-
-//       this.municipioService.deleteBatch(ids).subscribe({
-//         next: () => {
-//           this.poNotification.success('Itens removidos com sucesso!');
-//           this.recarregarTabela();
-//         },
-//         error: () => {
-//           this.poNotification.error('Erro ao remover os itens selecionados.');
-//         }
-//       });
-
-//       return ids.map(id => ({ id }));
-//     }

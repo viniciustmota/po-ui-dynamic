@@ -1,12 +1,12 @@
-// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { CadastrarCepComponent } from './pages/cadastrar-cep/cadastrar-cep.component';
 import { CadastrarEditarMunicipioComponent } from './pages/municipio/cadastrar-editar-municipio/cadastrar-editar-municipio.component';
 import { ListarMunicipiosComponent } from './pages/municipio/listar-municipios/listar-municipios.component';
 import { environment } from '../environments/environments';
+import { ListarCepsComponent } from './pages/cep/listar-ceps/listar-ceps.component';
+import { CadastrarEditarCepsComponent } from './pages/cep/cadastrar-editar-ceps/cadastrar-editar-ceps.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +25,17 @@ export const routes: Routes = [
   },
   {
     path: 'ceps/novo',
-    component: CadastrarCepComponent,
+    component: CadastrarEditarCepsComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'ceps/editar',
+    component: CadastrarEditarCepsComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'ceps',
+    component: ListarCepsComponent,
     canActivate: [authGuard]
   },
   {
@@ -37,10 +47,6 @@ export const routes: Routes = [
   path: 'municipios',
   component: ListarMunicipiosComponent,
   canActivate: [authGuard],
-  // data: {
-  //     serviceApi: `${environment.apiBaseUrl}/Municipios`,
-  //     idFeld: 'id',
-  //   }
   },
   {
     path: 'municipios/editar/:id',

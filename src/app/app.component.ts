@@ -26,7 +26,7 @@ import { PoPageLoginModule } from '@po-ui/ng-templates'
     PoPageLoginModule,
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  //styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   readonly menus: Array<PoMenuItem> = [

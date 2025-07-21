@@ -13,7 +13,7 @@ export class MenuLateralComponent {
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Página Inicial', link: '/home' },
-    { label: 'CEP', link: '/cadastrar-cep'},
+    { label: 'CEP', link: '/ceps'},
     { label: 'Municipio', link: '/municipios' },
     { label: 'Sair', action: this.logout.bind(this) }
   ];

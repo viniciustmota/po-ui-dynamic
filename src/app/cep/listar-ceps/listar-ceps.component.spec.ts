@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CadastrarCepComponent } from './cadastrar-cep.component';
+import { ListarCepsComponent } from './listar-ceps.component';
 
-describe('CadastrarCepComponent', () => {
-  let component: CadastrarCepComponent;
-  let fixture: ComponentFixture<CadastrarCepComponent>;
+describe('ListarCepsComponent', () => {
+  let component: ListarCepsComponent;
+  let fixture: ComponentFixture<ListarCepsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CadastrarCepComponent]
+      imports: [ListarCepsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CadastrarCepComponent);
+    fixture = TestBed.createComponent(ListarCepsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
