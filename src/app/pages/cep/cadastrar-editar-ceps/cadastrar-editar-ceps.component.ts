@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { PoToolbarModule, PoPageModule, PoDynamicModule, PoButtonModule, PoDynamicFormField, PoNotification, PoNotificationService } from "@po-ui/ng-components";
 import { MenuLateralComponent } from "../../../components/menu-lateral/menu-lateral.component";
 import { UfService } from '../../../services/uf/uf.service';
-import { MunicipioService } from '../../../services/municipio/municipio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, Location  } from '@angular/common';
+import { CepService } from '../../../services/cep/cep.service';
 
 
 @Component({
@@ -22,8 +22,7 @@ export class CadastrarEditarCepsComponent {
   model = {};
 
   constructor(
-    private ufService: UfService,
-    private municipioService : MunicipioService,
+    private cepService : CepService,
     private poNotification : PoNotificationService,
     private router : Router,
     private route : ActivatedRoute,
@@ -39,7 +38,7 @@ export class CadastrarEditarCepsComponent {
 
     if(this.isEditMode && id)
     {
-      this.municipioService.getMunicipio(id).subscribe({
+      this.cepService.getByCep(id).subscribe({
         next: (data) => {
           this.model = data;
         },
@@ -49,9 +48,11 @@ export class CadastrarEditarCepsComponent {
       })
     }
 
-    this.municipioService.obterCamposFormulario().subscribe({
+    this.cepService.obterCamposFormulario().subscribe({
       next: (metadata) => {
         this.fields = metadata.fields.filter((field: PoDynamicFormField) => field.property !== 'ufSigla');
+        console.log('fields:', this.fields);
+        console.log('model:', this.model);
       },
       error: () => {
         this.poNotification.error('Erro ao carregar campos do formulário.');
@@ -60,22 +61,22 @@ export class CadastrarEditarCepsComponent {
   }
 
   submit(formData: any) {
-    if (!formData.codIBGE || formData.codIBGE.toString().length > 7) {
-      this.poNotification.warning('O código IBGE deve ter no máximo 7 dígitos.');
-      return;
-    }
+    // if (!formData.cep || formData.cep.toString().length == 8) {
+    //   this.poNotification.warning('O Cep deve ter 8 dígitos.');
+    //   return;
+    // }
 
     const request = this.isEditMode
-      ? this.municipioService.EditarMunicipio(formData)
-      : this.municipioService.CriarMunicipio(formData);
+      ? this.cepService.EditarMunicipio(formData)
+      : this.cepService.CriarMunicipio(formData);
 
     request.subscribe({
       next: () => {
-        this.poNotification.success(`Município ${this.Notificacao} com sucesso!`);
-        this.router.navigate(['/municipios']);
+        this.poNotification.success(`CEP ${this.Notificacao} com sucesso!`);
+        this.router.navigate(['/ceps']);
       },
       error: (err) => {
-        this.poNotification.error(`Erro ao ${this.NomeMetodo} município.`);
+        this.poNotification.error(`Erro ao ${this.NomeMetodo} CEP.`);
       }
     })
   }

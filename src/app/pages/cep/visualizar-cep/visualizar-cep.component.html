@@ -1,0 +1,37 @@
+<div class="po-wrapper">
+  <po-toolbar p-title="Visualizar CEP"></po-toolbar>
+
+  <app-menu-lateral></app-menu-lateral>
+
+  <po-page-default class="po-md-10 po-offset-md-1">
+    <po-button
+      p-label="Novo"
+      (p-click)="irParaMunicipios()">
+    </po-button>
+
+    <po-divider
+      p-border-width="string"
+    >
+    </po-divider>
+
+    <po-container>
+      <po-dynamic-view
+      [p-fields]="fields"
+      [p-value]="cepData"
+      >
+      </po-dynamic-view>
+    </po-container>
+
+    <po-divider
+      p-border-width="string"
+    >
+    </po-divider>
+
+    <po-button
+        p-label="Voltar"
+        (p-click)="voltar()">
+    </po-button>
+
+  </po-page-default>
+
+</div>

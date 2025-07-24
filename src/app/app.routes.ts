@@ -4,9 +4,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CadastrarEditarMunicipioComponent } from './pages/municipio/cadastrar-editar-municipio/cadastrar-editar-municipio.component';
 import { ListarMunicipiosComponent } from './pages/municipio/listar-municipios/listar-municipios.component';
-import { environment } from '../environments/environments';
-import { ListarCepsComponent } from './pages/cep/listar-ceps/listar-ceps.component';
+import { ListarCepsComponent } from './pages/cep/pesquisar-cep/pesquisar-cep.component';
 import { CadastrarEditarCepsComponent } from './pages/cep/cadastrar-editar-ceps/cadastrar-editar-ceps.component';
+import { VisualizarCepComponent } from './pages/cep/visualizar-cep/visualizar-cep.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +36,11 @@ export const routes: Routes = [
   {
     path: 'ceps',
     component: ListarCepsComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'ceps/visualizar/:id',
+    component: VisualizarCepComponent,
     canActivate: [authGuard]
   },
   {

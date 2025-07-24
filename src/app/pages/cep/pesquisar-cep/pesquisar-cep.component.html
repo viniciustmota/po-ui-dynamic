@@ -1,0 +1,26 @@
+<div class="po-wrapper">
+  <po-toolbar p-title="Buscar CEP"></po-toolbar>
+
+  <app-menu-lateral></app-menu-lateral>
+
+  <po-page-default class="po-md-10 po-offset-md-1">
+    <po-button
+      p-label="Novo"
+      (p-click)="irParaMunicipios()">
+    </po-button>
+    
+    <po-container>
+      <po-dynamic-form
+      [p-fields]="camposBusca"
+      [p-value]="model"
+      (p-submit)="buscarCep()"
+    >
+    </po-dynamic-form>
+      <po-button
+        p-label="Pesquisar"
+        (p-click)="buscarCep()">
+      </po-button>
+    </po-container>
+  </po-page-default>
+
+</div>

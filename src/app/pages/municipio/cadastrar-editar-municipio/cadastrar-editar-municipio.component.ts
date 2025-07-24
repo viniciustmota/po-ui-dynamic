@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { PoToolbarModule, PoPageModule, PoDynamicModule, PoButtonModule, PoDynamicFormField, PoNotification, PoNotificationService } from "@po-ui/ng-components";
+import { PoToolbarModule, PoPageModule, PoDynamicModule, PoButtonModule, PoDynamicFormField, PoNotificationService } from "@po-ui/ng-components";
 import { MenuLateralComponent } from "../../../components/menu-lateral/menu-lateral.component";
-import { UfService } from '../../../services/uf/uf.service';
 import { MunicipioService } from '../../../services/municipio/municipio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, Location  } from '@angular/common';
@@ -22,7 +21,6 @@ export class CadastrarEditarMunicipioComponent {
   model = {};
 
   constructor(
-    private ufService: UfService,
     private municipioService : MunicipioService,
     private poNotification : PoNotificationService,
     private router : Router,

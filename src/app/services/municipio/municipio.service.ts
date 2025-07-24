@@ -57,4 +57,14 @@ export class MunicipioService {
     const headers = this.getHeaders();
     return this.http.post<any>(`${this.apiUrl}/delete-many`, ids, { headers });
   }
+
+  getMunicipiosPaginados(page: number, pageSize: number): Observable<{items: any[], hasNext: boolean}> {
+    const headers = this.getHeaders();
+
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.http.get<{ items: any[], hasNext: boolean}>(this.apiUrl, {headers, params});
+  }
 }

@@ -29,6 +29,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./listar-municipios.component.css']
 })
 export class ListarMunicipiosComponent {
+  page = 1;
+  pageSize = 10;
+
   mostrarTabela = true;
   serviceApi = '';
 
@@ -55,11 +58,18 @@ items: any[] = [];
     console.log('Campos atribuídos:', this.fields);
   });
 
-  this.http.get<any>(`${this.serviceApi}`).subscribe(response => {
-    console.log('Data response:', response);
-    this.items = response.items || [];
-    console.log('Itens atribuídos:', this.items);
-  });
+  this.municipioService.getMunicipiosPaginados(this.page, this.pageSize).subscribe({
+    next: (response) => {
+      console.log('Metadata response:', response);
+      this.items = response.items || [];
+      console.log('Campos atribuídos:', this.items);
+    },
+    error: (err) => {
+      console.error("Erro ao carregar municípios: ", err);
+      
+    }
+  })
+  
   }
 
    actions: PoPageDynamicTableActions = {

@@ -2,7 +2,7 @@
   <po-toolbar p-title="{{ isEditMode ? 'Editar CEP' : 'Cadastrar CEP'}}"></po-toolbar>
 
   <app-menu-lateral></app-menu-lateral>
-
+  
   <po-page-default class="po-md-10 po-offset-md-1">
     <po-dynamic-form
       [p-fields]="fields"
@@ -22,7 +22,5 @@
         (p-click)="submit(model)">
       </po-button>
     </div>
-
-
   </po-page-default>
 </div>
